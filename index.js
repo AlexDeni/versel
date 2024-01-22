@@ -7,8 +7,7 @@ require('./db');
 const PORT = process.env.PORT || 8080;
 
 const CatalogModel = require("./models/Catalog");
-// const userRoutes = require('./routes/userRoutes');
-app.use(express.json());
+//app.use(express.json());
 
 const MONGO_DB = 'mongodb+srv://alexdenisenko94:12345@cluster0.4zxfjoz.mongodb.net/blog?retryWrites=true&w=majority'
 mongoose.connect(MONGO_DB).then(()=>console.log('db ok')).catch(e => console.log('error', e))
