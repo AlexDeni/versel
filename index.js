@@ -3,13 +3,14 @@ const app = express();
 require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
-const productRoutes = require('./routes/productRoutes');
-const userRoutes = require('./routes/userRoutes');
-app.use(express.json());
-
+//const productRoutes = require('./routes/productRoutes');
+//const userRoutes = require('./routes/userRoutes');
+//app.use(express.json());
+console.log(11111)
 app.get('/', (req, res) => {
     res.send('products api running new deploy');
 });
+console.log(222)
 
 app.get('/ping', (req, res) => {
     res.send('PONG')
