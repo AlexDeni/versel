@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 require('./db');
 const PORT = process.env.PORT || 8080;
-const productRoutes = require('./routes/productRoutes');
-const userRoutes = require('./routes/userRoutes');
+
+const CatalogModel = require("./models/Catalog");
+// const userRoutes = require('./routes/userRoutes');
 app.use(express.json());
 
 const MONGO_DB = 'mongodb+srv://alexdenisenko94:12345@cluster0.4zxfjoz.mongodb.net/blog?retryWrites=true&w=majority'
@@ -20,10 +21,21 @@ app.get('/', (req, res) => {
 app.get('/ping', (req, res) => {
     res.send('PONG')
 });
-// /products
-app.use('/products', productRoutes);
-// /users
-app.use('/users', userRoutes);
+
+app.get('/catalog', async (req, res) => {
+    try {
+        const posts = await CatalogModel.find().exec()
+        res.json(posts)
+    }catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: 'Не удалось получить статьи'
+        })
+    }})
+// // /products
+// app.use('/products', productRoutes);
+// // /users
+// app.use('/users', userRoutes);
 
 app.listen(8080, () => {
     console.log('Server is listenin on PORT :' + PORT);
